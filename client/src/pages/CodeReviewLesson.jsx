@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/button'
@@ -178,8 +178,11 @@ const LESSONS = {
 
 const CodeReviewLesson = () => {
   const { lessonId } = useParams()
+  const navigate = useNavigate()
   const { token } = useAuth()
   const [progress, setProgress] = useState(null)
+  const lessonKeys = Object.keys(LESSONS)
+
   const [answers, setAnswers] = useState([])
   const [feedback, setFeedback] = useState([])
   const [submitting, setSubmitting] = useState(false)
@@ -236,6 +239,16 @@ const CodeReviewLesson = () => {
     const r = await api.completeCodeReviewLesson(lessonId, token)
     setProgress(r.progress || progress)
   }
+
+  const onNextLesson = () => {
+    const idx = lessonKeys.indexOf(lessonId)
+    const next = lessonKeys[idx + 1] || null
+    if (next) navigate(`/learn/code-review/${next}`)
+  }
+
+  const currentIdx = lessonKeys.indexOf(lessonId)
+  const hasNext = currentIdx !== -1 && currentIdx < lessonKeys.length - 1
+
 
   if (!info) return (
     <div className="min-h-screen bg-background">
@@ -349,6 +362,7 @@ const CodeReviewLesson = () => {
 
           <div className="flex items-center gap-3">
             <Button variant="outline" onClick={onMarkCompleted}>Mark as Completed</Button>
+            <Button variant="outline" onClick={onNextLesson} disabled={!hasNext}>Next</Button>
             <Link to="/learn/code-review"><Button variant="outline">Back</Button></Link>
           </div>
         </div>
@@ -357,5 +371,5 @@ const CodeReviewLesson = () => {
   )
 }
 
-export default CodeReviewLesson
+export default CodeReviewLesson;
 
