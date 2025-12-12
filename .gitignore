@@ -1,0 +1,26 @@
+# Root ignores
+node_modules/
+.env
+.env.local
+dist/
+build/
+.DS_Store
+
+# Client ignores (in case)
+client/node_modules/
+client/dist/
+client/build/
+
+# Server ignores
+server/node_modules/
+server/dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor folders
+.vscode/
+.idea/
