@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+/* OWASP Security Learning Platform Design System */
+
+@layer base {
+  :root {
+    /* Dark cybersecurity theme */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Electric cyan primary */
+    --primary: 187 100% 50%;
+    --primary-foreground: 222 47% 6%;
+
+    /* Muted blue-gray secondary */
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 55%;
+
+    /* Accent - bright cyan */
+    --accent: 187 100% 42%;
+    --accent-foreground: 222 47% 6%;
+
+    /* Danger/vulnerable code */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Success/secure code */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+
+    /* Warning */
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 6%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 187 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom glow effects */
+    --glow-primary: 0 0 30px hsl(187 100% 50% / 0.3);
+    --glow-success: 0 0 20px hsl(142 76% 36% / 0.3);
+    --glow-danger: 0 0 20px hsl(0 72% 51% / 0.3);
+
+    /* Severity colors */
+    --severity-critical: 0 84% 60%;
+    --severity-high: 25 95% 53%;
+    --severity-medium: 45 93% 47%;
+    --severity-low: 142 76% 36%;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 187 100% 50%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 187 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-success {
+    box-shadow: var(--glow-success);
+  }
+
+  .glow-danger {
+    box-shadow: var(--glow-danger);
+  }
+
+  .bg-grid {
+    background-image: 
+      linear-gradient(to right, hsl(217 33% 17% / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(217 33% 17% / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, hsl(187 100% 50% / 0.08) 0%, transparent 70%);
+  }
+
+  .code-vulnerable {
+    @apply bg-destructive/10 border-destructive/30;
+  }
+
+  .code-secure {
+    @apply bg-success/10 border-success/30;
+  }
+}
