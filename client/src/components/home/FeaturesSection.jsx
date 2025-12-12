@@ -59,28 +59,40 @@ const FeaturesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 sm:gap-6 xl:gap-8">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 sm:gap-6 xl:gap-8">
           {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="group relative p-4 sm:p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-300">
-                <div className={`inline-flex p-3 rounded-xl bg-secondary ${feature.color} mb-4`}>
-                  <feature.icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm xl:text-base">{feature.description}</p>
-                
-                {/* Hover glow effect */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <div className="absolute inset-0 rounded-2xl bg-primary/5" />
-                </div>
-              </div>
-            </motion.div>
+<motion.div
+  key={feature.title}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+>
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    transition={{ duration: 0.05 }}
+    className="group relative p-4 sm:p-6 rounded-2xl border border-border/50 
+    bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 
+    transition-all duration-300"
+  >
+    <div className={`inline-flex p-3 rounded-xl bg-secondary ${feature.color} mb-4`}>
+      <feature.icon className="h-6 w-6" />
+    </div>
+
+    <h3 className="text-base sm:text-lg font-semibold mb-2">
+      {feature.title}
+    </h3>
+
+    <p className="text-muted-foreground text-sm xl:text-base">
+      {feature.description}
+    </p>
+
+    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      <div className="absolute inset-0 rounded-2xl bg-primary/5" />
+    </div>
+  </motion.div>
+</motion.div>
+
           ))}
         </div>
       </div>

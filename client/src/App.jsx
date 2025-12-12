@@ -13,6 +13,7 @@ import BeginnerLesson from "./pages/BeginnerLesson";
 import CodeReviewPath from "./pages/CodeReviewPath";
 import CodeReviewLesson from "./pages/CodeReviewLesson";
 import NotFound from "./pages/NotFound";
+import Reviews from "./pages/Reviews";
 import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/learn/beginner/:lessonId" element={<RequireAuth><BeginnerLesson /></RequireAuth>} />
             <Route path="/learn/code-review" element={<RequireAuth><CodeReviewPath /></RequireAuth>} />
             <Route path="/learn/code-review/:lessonId" element={<RequireAuth><CodeReviewLesson /></RequireAuth>} />
+            <Route path="/reviews" element={<Reviews />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -13,6 +13,7 @@ const Header = () => {
     { href: "/", label: "Home" },
     { href: "/vulnerabilities", label: "OWASP Top 10" },
     { href: "/learn", label: "Learn" },
+    { href: "/reviews", label: "Reviews" },
   ];
 
   const isActive = (href) => {

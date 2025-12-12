@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes.js'
 import healthRoutes from './routes/healthRoutes.js'
 import learnBeginnerRoutes from './routes/learnBeginnerRoutes.js'
 import learnCodeReviewRoutes from './routes/learnCodeReviewRoutes.js'
+import reviewRoutes from './routes/reviewRoutes.js'
 import { authMiddleware, requireRole } from './middleware/auth.js'
 import { connectDB } from './config/db.js'
 
@@ -16,6 +17,7 @@ app.use('/api', authRoutes)
 app.use('/api', healthRoutes)
 app.use('/api', learnBeginnerRoutes)
 app.use('/api', learnCodeReviewRoutes)
+app.use('/api', reviewRoutes)
 
 app.get('/api/admin/stats', authMiddleware, requireRole('admin'), (req, res) => {
   res.json({ status: 'ok', message: 'admin-only endpoint' })

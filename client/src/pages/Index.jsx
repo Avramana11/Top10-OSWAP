@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { getReviews } from "@/api/reviews";
 
 const Index = () => {
+  const { data } = useQuery({ queryKey: ["reviews:index"], queryFn: () => getReviews() });
+  const reviews = (data?.reviews || []).slice(0, 6);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -47,6 +51,36 @@ const Index = () => {
                 </a>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between mb-6">
+              {/* <h2 className="text-2xl font-bold">Reviews</h2> */}
+              <div className="w-full flex justify-center">
+  <h2 className="text-3xl md:text-4xl font-bold text-gradient">Reviews</h2>
+</div>
+
+              <Link to="/reviews">
+                <Button variant="outline" size="sm">View All</Button>
+              </Link>
+            </div>
+            {reviews.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No reviews yet.</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {reviews.map((r) => (
+                  <div key={r._id} className="border rounded-2xl p-4 bg-card/50 hover:bg-card transition-colors">
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium">{r.name}</p>
+                      <span className="text-xs text-muted-foreground">{new Date(r.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <p className="mt-2 text-sm">{r.comment}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
