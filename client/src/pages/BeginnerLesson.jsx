@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ const LESSONS = [
 
 const BeginnerLesson = () => {
   const { lessonId } = useParams();
+  const navigate = useNavigate();
   const { token } = useAuth();
   const [progress, setProgress] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -107,6 +108,17 @@ const BeginnerLesson = () => {
     const r = await api.completeBeginnerLesson(lessonId, token);
     setProgress(r.progress || progress);
   };
+
+  const onNextLesson = () => {
+    const idx = LESSONS.findIndex((l) => l.lessonId === lessonId);
+    const next = LESSONS[idx + 1] || null;
+    if (next) {
+      navigate(`/learn/beginner/${next.lessonId}`);
+    }
+  };
+
+  const currentIdx = LESSONS.findIndex((l) => l.lessonId === lessonId);
+  const hasNext = currentIdx !== -1 && currentIdx < LESSONS.length - 1;
 
   const onResetQuiz = async () => {
     try {
@@ -264,6 +276,9 @@ const BeginnerLesson = () => {
           <div className="flex items-center gap-3">
             <Button variant="outline" onClick={onMarkCompleted}>
               Mark as Completed
+            </Button>
+            <Button variant="outline" onClick={onNextLesson} disabled={!hasNext}>
+              Next
             </Button>
             <Link to="/learn/beginner">
               <Button variant="outline">Back</Button>
