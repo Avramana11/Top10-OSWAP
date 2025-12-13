@@ -352,7 +352,7 @@ const CodeReviewLesson = () => {
                 ))}
               </div>
               <div className="flex items-center justify-between mt-6">
-                <div className="text-sm">{submitted && serverResult ? `Submitted: ${serverResult.score} / ${serverResult.total} (attempts: ${serverResult.attempts})` : `Score: ${answers.filter((a,i)=>a===info.quiz[i].a).length} / ${info.quiz.length}`}</div>
+                <div className="text-sm">{submitted && serverResult ? `Submitted: ${serverResult.score} / ${serverResult.total} (attempts: ${serverResult.attempts})` : `Score: ${score} / ${(info.quiz || []).length}`}</div>
                 <div className="flex gap-2">
                   <Button onClick={onSubmitQuiz} disabled={submitting}>{submitting?'Submitting...':'Submit Quiz'}</Button>
                 </div>
