@@ -16,7 +16,7 @@ const app = express()
 //   credentials: true
 // }));
 app.use(cors({
-  origin: "thttps://top10-oswap.vercel.app/",
+  origin: "https://top10-oswap.vercel.app/",
   credentials: true
 }));
 app.use(express.json())
