@@ -5,12 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative bg-white min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute inset-0 bg-gradient-radial" />
       
-      {/* Animated scan line */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent animate-scan-line" />
       </div>
@@ -23,7 +22,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8">
+            <span className="bg-black inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-indigo-900
+ text-sm font-medium mb-8">
               <Shield className="h-4 w-4" />
               OWASP Top 10 - 2021 Edition
             </span>
@@ -49,11 +49,13 @@ const HeroSection = () => {
   className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-6 w-full"
 >
   {/* Title LEFT */}
-  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-center sm:text-left max-w-3xl">
-    Master <span className="text-gradient">Web Security</span>
-    <br />
-    <span className="text-muted-foreground">One Vulnerability at a Time</span>
-  </h1>
+ <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-center sm:text-left max-w-3xl">
+  <span className="text-muted-foreground">Master </span>
+  <span className="text-gradient">Web Security</span>
+  <br />
+  <span className="text-muted-foreground">One Vulnerability at a Time</span>
+</h1>
+
 
   {/* Image RIGHT - BIG on large screens */}
   <img
@@ -77,7 +79,8 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="text-black md:text-xl text-indigo-900
+ max-w-2xl mx-auto mb-10"
           >
             Learn the most critical web application security risks with hands-on examples, 
             vulnerable code samples, and secure coding practices.
@@ -127,23 +130,43 @@ const HeroSection = () => {
       </div>
 
       {/* Floating elements */}
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/4 left-10 hidden lg:block"
       >
-        <div className="w-20 h-20 rounded-2xl border border-primary/20 bg-primary/5 backdrop-blur-sm flex items-center justify-center">
-          {/* <span className="text-4xl">🔒</span> */}
+        <div className="w-20 h-20 rounded-2xl border border-primary/20 bg-blue-300 backdrop-blur-sm flex items-center justify-center">
           <img src = "/cyber-threat.png" alt = "cyber treat" className = "w-12 h-12"/>
         </div>
-      </motion.div>
+      </motion.div> */}
+      <motion.div
+  animate={{ y: [0, -10, 0] }}
+  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+  className="absolute top-1/4 left-10 hidden lg:block"
+>
+  <div className="w-20 h-20 rounded-2xl
+    border border-teal-500/30
+    bg-teal-500/20
+    backdrop-blur-sm
+    flex items-center justify-center
+    shadow-sm"
+  >
+    <img
+      src="/cyber-threat.png"
+      alt="cyber threat"
+      className="w-12 h-12"
+    />
+  </div>
+</motion.div>
+
 
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute bottom-1/4 right-10 hidden lg:block"
       >
-        <div className="w-20 h-20 rounded-2xl border border-primary/20 bg-primary/5 backdrop-blur-sm flex items-center justify-center">
+        <div className="w-20 h-20 rounded-2xl border border-teal-500/30
+    bg-teal-500/20 backdrop-blur-sm flex items-center justify-center shadow-sm">
           <img src = "/icons8-shielding-48.png" alt = "cyber treat" className = "w-12 h-12"/>
         </div>
       </motion.div>

@@ -42,7 +42,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-16 md:py-24 relative">
+    <section className="bg-white py-16 md:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,9 +52,9 @@ const FeaturesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">
-            Learn Security <span className="text-gradient">The Right Way</span>
+            <span className="text-muted-foreground">Learn Security</span> <span className="text-gradient">The Right Way</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-3xl mx-auto">
+          <p className="text-black text-base sm:text-lg max-w-3xl mx-auto">
             Everything you need to understand and prevent the most critical web security vulnerabilities.
           </p>
         </motion.div>
@@ -68,26 +68,46 @@ const FeaturesSection = () => {
   viewport={{ once: true }}
   transition={{ duration: 0.5, delay: index * 0.1 }}
 >
-  <motion.div
+  {/* <motion.div
     whileHover={{ scale: 1.05 }}
     transition={{ duration: 0.05 }}
     className="group relative p-4 sm:p-6 rounded-2xl border border-border/50 
     bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 
     transition-all duration-300"
-  >
+  > */}
+  {/* <motion.div
+  whileHover={{ scale: 1.05 }}
+  transition={{ duration: 0.05 }}
+  className="group relative p-4 sm:p-6 rounded-2xl
+  border border-primary/30
+  bg-card backdrop-blur-sm
+  transition-all duration-300"
+> */}
+<motion.div
+  whileHover={{ scale: 1.05 }}
+  transition={{ duration: 0.05 }}
+  className="group relative p-4 sm:p-6 rounded-2xl
+  bg-white border border-gray-200 shadow-sm
+  transition-all duration-300"
+>
+
+
     <div className={`inline-flex p-3 rounded-xl bg-secondary ${feature.color} mb-4`}>
       <feature.icon className="h-6 w-6" />
     </div>
 
-    <h3 className="text-base sm:text-lg font-semibold mb-2">
+    <h3 className="text-indigo-900
+
+ sm:text-lg font-semibold mb-2">
       {feature.title}
     </h3>
 
-    <p className="text-muted-foreground text-sm xl:text-base">
+    <p className="text-black text-sm xl:text-base">
       {feature.description}
     </p>
 
-    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+    {/* <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"> */}
+    <div className="absolute inset-0 rounded-2xl opacity-100 pointer-events-none">
       <div className="absolute inset-0 rounded-2xl bg-primary/5" />
     </div>
   </motion.div>

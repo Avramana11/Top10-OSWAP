@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import api from '@/lib/api'
-import { toast } from '@/components/ui/use-toast'
 
 const AuthContext = createContext(null)
 
@@ -35,7 +34,6 @@ export const AuthProvider = ({ children }) => {
     setToken(r.token)
     setUser(r.user)
     navigate('/')
-    toast({ title: 'Successfully signed in', description: `Welcome, ${r.user.username}` })
   }
 
   const register = async (username, email, password) => {
@@ -44,7 +42,6 @@ export const AuthProvider = ({ children }) => {
     setToken(r.token)
     setUser(r.user)
     navigate('/')
-    toast({ title: 'Account created', description: 'You are now signed in' })
   }
 
   const logout = () => {
@@ -52,7 +49,6 @@ export const AuthProvider = ({ children }) => {
     setToken(null)
     setUser(null)
     navigate('/')
-    toast({ title: 'Successfully logged out' })
   }
 
   const value = useMemo(() => ({ token, user, loading, login, register, logout }), [token, user, loading])

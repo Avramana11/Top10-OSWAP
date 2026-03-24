@@ -35,7 +35,7 @@ export const login = async (req, res) => {
   const doc = await User.findOne({ email: e })
   if (!doc) return res.status(401).json({ error: 'invalid_credentials' })
   const ok = bcrypt.compareSync(String(password), doc.passwordHash)
-  if (!ok) return res.status(401).json({ error: 'invalid_credentials' })
+  if (!ok) return res.status(401).json({ error: 'invalid_credentials' }) 
   const safeUser = { id: doc.id, username: doc.username, role: doc.role }
   const token = signToken(safeUser)
   res.json({ token, user: safeUser })

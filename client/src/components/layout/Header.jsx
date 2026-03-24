@@ -69,12 +69,22 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-3">
             {!user ? (
               <Link to="/login">
-                <Button variant="ghost" size="sm" className="text-muted-foreground">Sign In</Button>
+                {/* <Button variant="ghost" size="sm" className="text-muted-foreground"> */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary">
+                  Sign In
+                </Button>
               </Link>
             ) : (
               <>
-                <span className="text-sm text-muted-foreground">{user.username}</span>
-                <Button size="sm" variant="outline" onClick={logout}>Logout</Button>
+                <span className="text-sm text-muted-foreground">
+                  {user.username}
+                </span>
+                <Button size="sm" variant="outline" onClick={logout} className="bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary">
+                  Logout
+                </Button>
               </>
             )}
           </div>
@@ -84,7 +94,11 @@ const Header = () => {
             className="md:hidden p-2 text-foreground"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
@@ -114,10 +128,21 @@ const Header = () => {
               <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-border/50">
                 {!user ? (
                   <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="ghost" size="sm" className="justify-start">Sign In</Button>
+                    <Button variant="ghost" size="sm" className="justify-start">
+                      Sign In
+                    </Button>
                   </Link>
                 ) : (
-                  <Button size="sm" variant="outline" onClick={() => { logout(); setIsMenuOpen(false); }}>Logout</Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Logout
+                  </Button>
                 )}
               </div>
             </div>
