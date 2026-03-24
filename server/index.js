@@ -11,8 +11,12 @@ import { connectDB } from './config/db.js'
 
 const app = express()
 // app.use(cors({ origin: ['http://localhost:8080'], credentials: true }))
+// app.use(cors({
+//   origin: "*",
+//   credentials: true
+// }));
 app.use(cors({
-  origin: "*",
+  origin: "https://top10-owsap.vercel.app",
   credentials: true
 }));
 app.use(express.json())
