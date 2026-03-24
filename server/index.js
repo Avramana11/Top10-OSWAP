@@ -16,8 +16,10 @@ const app = express()
 //   credentials: true
 // }));
 app.use(cors({
-  origin: "https://top10-oswap.vercel.app/",
-  credentials: true
+  origin: ["https://top10-oswap.vercel.app", "http://localhost:8080"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json())
 
