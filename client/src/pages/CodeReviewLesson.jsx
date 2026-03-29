@@ -7,6 +7,8 @@ import { Progress } from '@/components/ui/progress'
 import CodeBlock from '@/components/ui/CodeBlock'
 import { useAuth } from '@/context/AuthContext'
 import api from '@/lib/api'
+import { useToast } from '@/hooks/use-toast'
+import { Check } from 'lucide-react'
 
 const LESSONS = {
   'cr-1': {
@@ -180,6 +182,7 @@ const CodeReviewLesson = () => {
   const { lessonId } = useParams()
   const navigate = useNavigate()
   const { token } = useAuth()
+  const { toast } = useToast()
   const [progress, setProgress] = useState(null)
   const lessonKeys = Object.keys(LESSONS)
 
@@ -188,6 +191,7 @@ const CodeReviewLesson = () => {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [serverResult, setServerResult] = useState(null)
+  const [marking, setMarking] = useState(false)
   const info = LESSONS[lessonId]
 
   useEffect(() => {
@@ -236,8 +240,14 @@ const CodeReviewLesson = () => {
   }
 
   const onMarkCompleted = async () => {
-    const r = await api.completeCodeReviewLesson(lessonId, token)
-    setProgress(r.progress || progress)
+    setMarking(true)
+    try {
+      const r = await api.completeCodeReviewLesson(lessonId, token)
+      setProgress(r.progress || progress)
+      toast({ title: 'Lesson Completed', description: 'Nice work — progress updated!' })
+    } finally {
+      setMarking(false)
+    }
   }
 
   const onNextLesson = () => {
@@ -248,6 +258,8 @@ const CodeReviewLesson = () => {
 
   const currentIdx = lessonKeys.indexOf(lessonId)
   const hasNext = currentIdx !== -1 && currentIdx < lessonKeys.length - 1
+
+  const isCompleted = (progress?.completedLessons || []).includes(lessonId)
 
 
   if (!info) return (
@@ -278,7 +290,15 @@ const CodeReviewLesson = () => {
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">{info.title}</h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">{info.title}</h1>
+              {isCompleted && (
+                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-sm bg-success/10 text-success border border-success/20">
+                  <Check className="h-4 w-4" />
+                  Completed
+                </span>
+              )}
+            </div>
             <p className="text-muted-foreground">{info.description}</p>
           </motion.div>
 
@@ -361,7 +381,7 @@ const CodeReviewLesson = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={onMarkCompleted}>Mark as Completed</Button>
+            <Button variant="outline" onClick={onMarkCompleted} disabled={isCompleted || marking}>{isCompleted ? (<><Check className="h-4 w-4 text-success mr-2 animate-pulse" />Completed</>) : (marking ? 'Marking...' : 'Mark as Completed')}</Button>
             <Button variant="outline" onClick={onNextLesson} disabled={!hasNext}>Next</Button>
             <Link to="/learn/code-review"><Button variant="outline">Back</Button></Link>
           </div>
@@ -372,4 +392,3 @@ const CodeReviewLesson = () => {
 }
 
 export default CodeReviewLesson;
-
